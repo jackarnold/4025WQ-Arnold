@@ -25,6 +25,7 @@ namespace Mine.Views
             InitializeComponent();
 
             MasterBehavior = MasterBehavior.Popover;
+            //Constructor Does not exist ... 
         }
 
         /// <summary>
