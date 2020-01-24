@@ -18,7 +18,7 @@ namespace Mine.Views
         }
         async void GameButton_Clicked(object sender, EventArgs e) 
         { 
-            DisplayAlert("SU", "Go RedHawks", "OK"); 
+            DisplayAlert("SU", "Go RedHawks", "OK");
         }
     }
 }
