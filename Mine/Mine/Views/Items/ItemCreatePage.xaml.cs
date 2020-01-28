@@ -23,11 +23,13 @@ namespace Mine.Views
         /// </summary>
         public ItemCreatePage(ItemViewModel data)
         {
+
             InitializeComponent();
 
             data.Data = new ItemModel();
 
             BindingContext = this.ViewModel = data;
+
         }
 
         /// <summary>
@@ -41,11 +43,6 @@ namespace Mine.Views
             await Navigation.PopModalAsync();
         }
 
-        void Value_OnStepperValueChanged(object sender, ValueChangedEventArgs e)
-        {
-            ValueValue.Text = String.Format("{0}", e.NewValue);
-        }
-
         /// <summary>
         /// Cancel the Create
         /// </summary>
@@ -54,6 +51,16 @@ namespace Mine.Views
         async void Cancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
+        }
+
+        void Value_OnStepperValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            ValueValue.Text = String.Format("{0}", e.NewValue);
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
         }
     }
 }
