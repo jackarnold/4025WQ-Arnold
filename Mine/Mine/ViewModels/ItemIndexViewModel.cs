@@ -51,6 +51,11 @@ namespace Mine.ViewModels
             {
                 await Delete(data as ItemModel);
             });
+            // Register the Update Message
+            MessagingCenter.Subscribe<ItemUpdatePage, ItemModel>(this, "Update", async (obj, data) =>
+            {
+                await Update(data as ItemModel);
+            });
         }
 
         /// <summary>
@@ -79,6 +84,24 @@ namespace Mine.ViewModels
             }
             Dataset.Remove(data);
             var result = await DataStore.DeleteAsync(data.Id);
+            return result;
+        }
+
+        /// <summary>
+        /// API to update the Data
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public async Task<bool> Update(ItemModel data)
+        {
+            var record = await Read(data.Id);
+            if (record == null)
+            {
+                return false;
+            }
+            record.Update(data);
+            var result = await DataStore.UpdateAsync(record);
+            await ExecuteLoadDataCommand();
             return result;
         }
 
