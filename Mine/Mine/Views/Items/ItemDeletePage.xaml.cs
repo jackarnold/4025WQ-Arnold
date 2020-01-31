@@ -35,9 +35,13 @@ namespace Mine.Views
         {
             MessagingCenter.Send(this, "Delete", viewModel.Data);
 
-            Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
 
-            await Navigation.PopAsync();
+            //Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count-2]);
+
+            
+            await Navigation.PopModalAsync();
+         
+            
         }
 
         /// <summary>
