@@ -60,6 +60,7 @@ namespace Mine.Views
 
         protected override bool OnBackButtonPressed()
         {
+
             return true;
         }
     }
