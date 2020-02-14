@@ -16,14 +16,39 @@ namespace Mine.ViewModels
     /// </summary>
     public class ItemIndexViewModel : BaseViewModel
     {
+
+        private static volatile ItemIndexViewModel instance;
+        private static readonly object syncRoot = new Object();
+        public static ItemIndexViewModel Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (syncRoot)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new ItemIndexViewModel();
+                        }
+                    }
+                }
+
+                return instance;
+            }
+        }
         // The Data set of records
         public ObservableCollection<ItemModel> Dataset { get; set; }
 
         /// <summary>
         /// Connection to the Data store
         /// </summary>
-        public IDataStore<ItemModel> DataStore => DependencyService.Get<IDataStore<ItemModel>>();
+        //public IDataStore<ItemModel> DataStore => DependencyService.Get<IDataStore<ItemModel>>();
+        public IDataStore<ItemModel> DataSource_Mock => new MockDataStore();
+        public IDataStore<ItemModel> DataSource_SQL => new DatabaseService();
 
+        public int CurrentDataSource = 0;
+        public IDataStore<ItemModel> DataStore;
         // Command to force a Load of data
         public Command LoadDatasetCommand { get; set; }
 
@@ -56,8 +81,42 @@ namespace Mine.ViewModels
             {
                 await Update(data as ItemModel);
             });
+            // Register the Set Data Source Message
+            MessagingCenter.Subscribe<AboutPage, int>(this, "SetDataSource", (obj, data) =>
+            {
+                SetDataSource(data);
+            });
+
+            // Register the Wipe Data List Message
+            MessagingCenter.Subscribe<AboutPage, bool>(this, "WipeDataList", (obj, data) =>
+            {
+                WipeDataList();
+            });
+        }
+        public void WipeDataList()
+        {
+            DataStore.WipeDataList();
+            SetNeedsRefresh(true);
         }
 
+        public bool SetDataSource(int isSQL)
+        {
+            if (isSQL == 1)
+            {
+                DataStore = DataSource_SQL;
+                CurrentDataSource = 1;
+            }
+            else
+            {
+                DataStore = DataSource_Mock;
+                CurrentDataSource = 0;
+            }
+
+            // Set Flag for Refresh
+            SetNeedsRefresh(true);
+
+            return true;
+        }
         /// <summary>
         /// API to add the Data
         /// </summary>
