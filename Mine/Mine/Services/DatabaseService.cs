@@ -40,10 +40,11 @@ namespace Mine.Services
                 }
             }
         }
-        public async Task<bool> CreateAsync(ItemModel item)
-        {   
-                Database.InsertAsync(item);
-                return await Task.FromResult(true);
+        
+        public Task<bool> CreateAsync(ItemModel Data)
+        {
+            Database.InsertAsync(Data);
+            return Task.FromResult(true);
         }
 
         public async Task<bool> UpdateAsync(ItemModel data)
@@ -57,13 +58,7 @@ namespace Mine.Services
             return await Task.FromResult(true);
         }
 
-        //public async Task<ItemModel> ReadAsync(string id)
-        //{
-        //    //return await Task.FromResult(datalist.FirstOrDefault(s => s.Id == id));
-        //    return await Task.FromResult(Database.Table<ItemModel>().Where(i => i.Id == id).FirstOrDefaultAsync());
-
-        //}
-
+        
         //...
     }
 }
