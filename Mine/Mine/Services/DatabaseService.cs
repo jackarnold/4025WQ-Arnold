@@ -40,7 +40,16 @@ namespace Mine.Services
                 return await Task.FromResult(true);
         }
 
+        public async Task<bool> UpdateAsync(ItemModel data)
+        {
+            //var oldData = datalist.Where((ItemModel arg) => arg.Id == data.Id).FirstOrDefault();
+            //datalist.Remove(oldData);
+            //datalist.Add(data);
 
+            Database.UpdateAsync(data);
+
+            return await Task.FromResult(true);
+        }
         //...
     }
 }
