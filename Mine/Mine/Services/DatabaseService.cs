@@ -11,15 +11,10 @@ namespace Mine.Services
     public class DatabaseService : IDataStore<ItemModel>
     {
 
-        
-
         static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>
         {
             return new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
         });
-
-
-
 
         static SQLiteAsyncConnection Database => lazyInitializer.Value;
         static bool initialized = false;
@@ -88,7 +83,10 @@ namespace Mine.Services
         {
             return Database.Table<ItemModel>().ToListAsync();
         }
-
+        public async void DeleteTables()
+        {
+            await Database.DropTableAsync<ItemModel>();
+        }
         //...
     }
 }
