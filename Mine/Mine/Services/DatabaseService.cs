@@ -8,12 +8,18 @@ using Mine.Models;
 
 namespace Mine.Services 
 {
-    public class DatabaseService : IDataStore<ItemModel>
+    public class DatabaseService //: IDataStore<ItemModel>
     {
+
+        public List<ItemModel> datalist;
+
         static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>
         {
             return new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
         });
+
+
+
 
         static SQLiteAsyncConnection Database => lazyInitializer.Value;
         static bool initialized = false;
@@ -50,6 +56,14 @@ namespace Mine.Services
 
             return await Task.FromResult(true);
         }
+
+        //public async Task<ItemModel> ReadAsync(string id)
+        //{
+        //    //return await Task.FromResult(datalist.FirstOrDefault(s => s.Id == id));
+        //    return await Task.FromResult(Database.Table<ItemModel>().Where(i => i.Id == id).FirstOrDefaultAsync());
+
+        //}
+
         //...
     }
 }
