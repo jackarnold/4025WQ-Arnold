@@ -22,19 +22,19 @@ namespace Mine.Models
         public int Value { get; set; } = 0;
         public ItemModel() { }
 
-        //public ItemModel(ItemModel data)
-        //{
-        //    AuditHistoryString = data.AuditHistoryString;
-        //    AuditHistory = JsonConvert.DeserializeObject<List<History>>(AuditHistoryString);
+        public ItemModel(ItemModel data)
+        {
+            AuditHistoryString = data.AuditHistoryString;
+            AuditHistory = JsonConvert.DeserializeObject<List<History>>(AuditHistoryString);
 
-        //    // Update the Base
-        //    Id = data.Id;
-        //    Name = data.Name;
-        //    Description = data.Description;
+            // Update the Base
+            Id = data.Id;
+            Name = data.Name;
+            Description = data.Description;
 
-        //    // Update the extended
-        //    Value = data.Value;
-        //}
+            // Update the extended
+            Value = data.Value;
+        }
         public bool Update(ItemModel data)
         {
             var latest = JsonConvert.SerializeObject(data);
