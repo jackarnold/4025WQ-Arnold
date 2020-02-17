@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Mine.Models;
 namespace Mine.Services
 {
     /// <summary>
@@ -13,6 +13,6 @@ namespace Mine.Services
         Task<bool> UpdateAsync(T Data);
         Task<bool> DeleteAsync(string id);
         Task<T> ReadAsync(string id);
-        Task<IEnumerable<T>> IndexAsync(bool forceRefresh = false);
+        Task<List<ItemModel>> IndexAsync(bool forceRefresh = false);
     }
 }
