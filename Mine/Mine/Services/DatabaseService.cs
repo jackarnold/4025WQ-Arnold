@@ -79,6 +79,12 @@ namespace Mine.Services
             Database.DeleteAsync(myRead);
             return Task.FromResult(true);
         }
+
+        public Task<List<ItemModel>> IndexAsync(bool flag = false)
+        {
+            return Database.Table<ItemModel>().ToListAsync();
+        }
+
         //...
     }
 }
