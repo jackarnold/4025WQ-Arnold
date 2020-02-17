@@ -11,7 +11,7 @@ namespace Mine.Services
     public class DatabaseService //: IDataStore<ItemModel>
     {
 
-        public List<ItemModel> datalist;
+        
 
         static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>
         {
