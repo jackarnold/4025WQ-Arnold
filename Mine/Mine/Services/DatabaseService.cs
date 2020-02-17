@@ -64,7 +64,21 @@ namespace Mine.Services
         {
             return Database.Table<ItemModel>().Where(i => i.Id.Equals(id)).FirstOrDefaultAsync();
         }
+        public Task<bool> DeleteAsync(string id)
+        {
+            // Check if it exists...
+            var myRead = ReadAsync(id).GetAwaiter().GetResult();
+            if (myRead == null)
+            {
+                return Task.FromResult(false);
 
+            }
+
+            // Then delete...
+
+            Database.DeleteAsync(myRead);
+            return Task.FromResult(true);
+        }
         //...
     }
 }
