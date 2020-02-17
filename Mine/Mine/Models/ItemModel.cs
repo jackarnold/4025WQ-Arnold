@@ -37,14 +37,36 @@ namespace Mine.Models
         }
         public bool Update(ItemModel data)
         {
-            //DO NOT UPDATE THE ID, otherwise the record will be orphaned
-            //Id = data.id //leave commented out
+            var latest = JsonConvert.SerializeObject(data);
+            var previous = JsonConvert.SerializeObject(this);
 
-            //update the base
+            AuditHistory = data.AuditHistory;
+
+            if (AuditHistory == null)
+            {
+                AuditHistory = new List<History>();
+            }
+
+            AuditHistory.Add(new History
+            {
+                Note = "Upated",
+                ChangedLatest = latest,
+                ChangedPrevious = previous,
+                ChangeSize = latest.Length - previous.Length
+            });
+
+            AuditHistoryString = JsonConvert.SerializeObject(AuditHistory);
+
+            // Do not update the ID, if you do, the record will be orphaned
+            // Id = data.Id;
+
+            // Update the Base
             Name = data.Name;
             Description = data.Description;
-            //update the extended
+
+            // Update the extended
             Value = data.Value;
+
             return true;
         }
 
