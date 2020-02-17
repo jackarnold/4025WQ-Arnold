@@ -106,6 +106,12 @@ namespace Mine.ViewModels
             {
                 await Update(data as ItemModel);
             });
+
+            MessagingCenter.Subscribe<AboutPage, int>(this, "SetDataSource", (obj, data) =>
+            {
+                SetDataSource(data);
+            });
+
         }
 
         /// <summary>
