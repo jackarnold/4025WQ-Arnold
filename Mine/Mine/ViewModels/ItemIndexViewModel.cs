@@ -56,6 +56,8 @@ namespace Mine.ViewModels
 
         private bool _needsRefresh;
 
+        public int CurrentDataSource = 0;
+
         /// <summary>
         /// Constructor
         /// 
