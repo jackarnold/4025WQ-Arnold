@@ -20,7 +20,21 @@ namespace Mine.Models
         public string AuditHistoryString { get; set; } = string.Empty;
         // Add Unique attributes for Item
         public int Value { get; set; } = 0;
+        public ItemModel() { }
 
+        public ItemModel(ItemModel data)
+        {
+            AuditHistoryString = data.AuditHistoryString;
+            AuditHistory = JsonConvert.DeserializeObject<List<History>>(AuditHistoryString);
+
+            // Update the Base
+            Id = data.Id;
+            Name = data.Name;
+            Description = data.Description;
+
+            // Update the extended
+            Value = data.Value;
+        }
         public bool Update(ItemModel data)
         {
             //DO NOT UPDATE THE ID, otherwise the record will be orphaned
