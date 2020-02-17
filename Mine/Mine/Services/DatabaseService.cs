@@ -60,7 +60,10 @@ namespace Mine.Services
 
             return Task.FromResult(true);
         }
-
+        public Task<ItemModel> ReadAsync(string id)
+        {
+            return Database.Table<ItemModel>().Where(i => i.Id.Equals(id)).FirstOrDefaultAsync();
+        }
 
         //...
     }
