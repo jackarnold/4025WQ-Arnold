@@ -12,6 +12,12 @@ namespace Mine.Models
     /// </summary>
     public class ItemModel : BaseModel
     {
+
+        [Ignore]
+        public List<History> AuditHistory { get; set; } = new List<History>();
+
+        // Holds the AuditHistory Json
+        public string AuditHistoryString { get; set; } = string.Empty;
         // Add Unique attributes for Item
         public int Value { get; set; } = 0;
 
