@@ -1,4 +1,11 @@
-﻿namespace Mine.Models
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using SQLite;
+
+
+
+namespace Mine.Models
 {
     /// <summary>
     /// Item for the Game
@@ -22,5 +29,22 @@
         }
 
 
+    }
+    public class History
+    {
+        // Change DateTime
+        public DateTime ChangeDateTime { get; set; } = DateTime.Now;
+
+        // Comments about the Change
+        public string Note { get; set; } = "Note";
+
+        // The Latest Record
+        public string ChangedLatest { get; set; } = string.Empty;
+
+        // The Previous Record
+        public string ChangedPrevious { get; set; } = string.Empty;
+
+        // The Size of the change between Latest - Prevous
+        public int ChangeSize { get; set; } = 0;
     }
 }
