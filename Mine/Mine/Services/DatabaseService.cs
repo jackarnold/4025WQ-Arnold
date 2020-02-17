@@ -8,7 +8,7 @@ using Mine.Models;
 
 namespace Mine.Services 
 {
-    public class DatabaseService //: IDataStore<ItemModel>
+    public class DatabaseService : IDataStore<ItemModel>
     {
 
         
