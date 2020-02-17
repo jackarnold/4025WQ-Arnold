@@ -87,6 +87,10 @@ namespace Mine.Services
         {
             await Database.DropTableAsync<ItemModel>();
         }
+        public async void CreateTables()
+        {
+            await Database.CreateTableAsync<ItemModel>();
+        }
         //...
     }
 }
