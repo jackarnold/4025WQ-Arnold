@@ -40,7 +40,11 @@ namespace Mine.Services
 
             return true;
         }
-
+        public void WipeDataList()
+        {
+            datalist.Clear();
+            LoadDefaultData();
+        }
         /// <summary>
         /// Add the data to the list
         /// </summary>
